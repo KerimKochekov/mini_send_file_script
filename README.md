@@ -1,5 +1,8 @@
-# Sending file to any address with python socket library
-  $ python3 your_script.py file domain-name|ip-address port-number <br>
+# Sending file to any address with python socket library <br>
+First we configure port number on server.py and run the server on that part. Now with fixed port number we will run the client part in following: <br>
+Format: <br>
+	$ python3 client.py file domain-name|ip-address port-number <br>
+<br>
 Example usage:<br>
-  $ python3 send_file.py meme.png your_vps.ru 8800 <br>
-  $ python3 send_file.py video.mp4 18.33.12.49 9332 <br>
+	$ python3 client.py meme.png your_vps.ru 8800 <br>
+	$ python3 client.py video.mp4 18.33.12.49 9332 <br>
