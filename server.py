@@ -2,8 +2,8 @@ import socket
 import os
 import tqdm
 
-SERVER_HOST = "0.0.0.0" #ip address
-SERVER_PORT = 5001 #port number
+SERVER_HOST = "0.0.0.0"  # ip address
+SERVER_PORT = 5001  # port number
 BUFFER_SIZE = 4096
 SEPARATOR = "<SEPARATOR>"
 
@@ -24,23 +24,30 @@ while True:
 
     # if file already exist
     if(os.path.exists(filename) == True):
-        ind, ext = 0, filename.rfind(".") #exclude extension format of file
-        while(os.path.exists(filename[:ext] + str(ind) + filename[ext:]) == True): #search new name by adding some integer to the end of file name
+        ind, ext = 0, filename.rfind(".")  # exclude extension format of file
+        # search new name by adding some integer to the end of file name
+        while(os.path.exists(filename[:ext] + str(ind) + filename[ext:]) == True):
             ind = ind + 1
         filename = filename[:ext] + str(ind) + filename[ext:]
 
-    progress = tqdm.tqdm(range(filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
-     
+    progress = tqdm.tqdm(range(
+        filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
+    ok = False
     with open(filename, "wb") as f:
         for _ in progress:
             bytes_read = client_socket.recv(BUFFER_SIZE)
             if not bytes_read:
+                ok = True
                 break
             f.write(bytes_read)
         progress.update(len(bytes_read))
 
-    print("	[+] FIle named '"+filename+"' successfully downloaded.")
+    if ok == True:
+        print("	[+] File named '" + filename + "' successfully downloaded.")
+    else:
+        print("	[-] File named '" + filename + "' failed to download.")
+        
     client_socket.close()
-    print(f"[+] {address} is disconnected.\n",end="\n")
-    
+    print(f"[+] {address} is disconnected.\n", end="\n")
+
 s.close()
