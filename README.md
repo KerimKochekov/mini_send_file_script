@@ -1,5 +1,5 @@
 # Sending file to any address with python socket library <br>
-First we configure port number on server.py and run the server on that part. Now with fixed port number we will run the client part in following: <br>
+First we configure port number on server.py and run the server. Now with fixed port number we will run the client part in following: <br>
 **Format:** <br>
 	*$ python3 client.py file domain-name|ip-address port-number* <br>
 <br>
