@@ -3,7 +3,7 @@ import os
 import tqdm
 
 SERVER_HOST = "0.0.0.0"  # ip address
-SERVER_PORT = 5001  # port number
+SERVER_PORT = 8800  # port number
 BUFFER_SIZE = 4096
 SEPARATOR = "<SEPARATOR>"
 
@@ -32,21 +32,16 @@ while True:
 
     progress = tqdm.tqdm(range(
         filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
-    ok = False
+        
     with open(filename, "wb") as f:
         for _ in progress:
             bytes_read = client_socket.recv(BUFFER_SIZE)
             if not bytes_read:
-                ok = True
                 break
             f.write(bytes_read)
         progress.update(len(bytes_read))
 
-    if ok == True:
-        print("	[+] File named '" + filename + "' successfully downloaded.")
-    else:
-        print("	[-] File named '" + filename + "' failed to download.")
-        
+    print("	[+] FIle named '" + filename + "' successfully downloaded.")
     client_socket.close()
     print(f"[+] {address} is disconnected.\n", end="\n")
 
