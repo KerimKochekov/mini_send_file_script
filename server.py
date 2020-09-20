@@ -30,8 +30,7 @@ while True:
             ind = ind + 1
         filename = filename[:ext] + str(ind) + filename[ext:]
 
-    progress = tqdm.tqdm(range(
-        filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
+    progress = tqdm.tqdm(range(filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
         
     with open(filename, "wb") as f:
         for _ in progress:
